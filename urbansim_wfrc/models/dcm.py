@@ -794,7 +794,7 @@ class MNLDiscreteChoiceModel(DiscreteChoiceModel):
 
     @classmethod
     def predict_from_cfg(cls, choosers, alternatives, cfgname=None, cfg=None,
-                         alternative_ratio=2.0, debug=False):
+                         alternative_ratio=3.0, debug=False):
         """
         Simulate choices for the specified choosers
 
@@ -1195,6 +1195,7 @@ class MNLDiscreteChoiceModelGroup(DiscreteChoiceModel):
 
         for name, df in self._iter_groups(choosers):
             choices = self.models[name].predict(df, alternatives, debug=debug)
+            
             if self.remove_alts and len(alternatives) > 0:
                 alternatives = alternatives.loc[
                     ~alternatives.index.isin(choices)]
@@ -1644,6 +1645,7 @@ class SegmentedMNLDiscreteChoiceModel(DiscreteChoiceModel):
             choosers, alternatives)
 
         results = self._group.predict(choosers, alternatives, debug=debug)
+
         logger.debug(
             'finish: predict models in segmented LCM {}'.format(self.name))
         return results
@@ -1815,7 +1817,7 @@ class SegmentedMNLDiscreteChoiceModel(DiscreteChoiceModel):
 
     @classmethod
     def predict_from_cfg(cls, choosers, alternatives, cfgname=None, cfg=None,
-                         alternative_ratio=2.0, debug=False):
+                         alternative_ratio=3.0, debug=True):
         """
         Simulate the discrete choices for the specified choosers
 
@@ -1870,6 +1872,8 @@ class SegmentedMNLDiscreteChoiceModel(DiscreteChoiceModel):
                 "  after sampling %d alternatives are available\n"
                 % len(alternatives))
 
+
+        
         new_units = lcm.predict(choosers, alternatives, debug=debug)
         print("Assigned %d choosers to new units" % len(new_units.dropna()))
         logger.debug('finish: predict from configuration {}'.format(cfgname))
