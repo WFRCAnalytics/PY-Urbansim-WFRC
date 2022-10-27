@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="urbansim_wfrc",
-    version="0.4.2",
+    version="0.4.3",
     author="WFRC_Analytics",
     author_email="jreynolds@wfrc.org",
     description="Urbansim library originally by Paul Waddell, customized by WFRC Analytics",
@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        'numpy >= 1.8.0',
+        #'numpy >= 1.8.0',
         'orca_wfrc >= 0.0.1',
         #'pandas = 0.25.1',
         #'pandana = 0.6.1',
